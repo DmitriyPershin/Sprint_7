@@ -27,24 +27,25 @@ public class TestCreateOrders {
     private final String comment;
     private final String color;
 
-    public TestCreateOrders(String firstName, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment, String color){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.address=address;
-        this.metroStation=metroStation;
-        this.phone=phone;
-        this.rentTime=rentTime;
-        this.deliveryDate=deliveryDate;
-        this.comment=comment;
-        this.color=color;
+    public TestCreateOrders(String firstName, String lastName, String address, String metroStation, String phone, int rentTime, String deliveryDate, String comment, String color) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.metroStation = metroStation;
+        this.phone = phone;
+        this.rentTime = rentTime;
+        this.deliveryDate = deliveryDate;
+        this.comment = comment;
+        this.color = color;
     }
+
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
-        return Arrays.asList(new Object[][] {
-                {"Vasya", "Pupkin","Pushkina1","Bolshaya1","+79212116771",5,"11.02.2023","Lalalalaasdlal","BLACK"},
-                {"Gena", "Pupkin","Pushkina2","Bolshaya2","+79212116772",5,"12.02.2023","Lalalhsalalal","GREY"},
-                {"Sasha", "Pupkin","Pushkina3","Bolshaya3","+79212116773",5,"13.02.2023","Lalaldasalalal","BLACK,GREY"},
-                {"Lena", "Pupkin","Pushkina4","Bolshaya4","+79212116774",5,"14.02.2023","Lalalaxczxlalal",""}
+        return Arrays.asList(new Object[][]{
+                {"Vasya", "Pupkin", "Pushkina1", "Bolshaya1", "+79212116771", 5, "11.02.2023", "Lalalalaasdlal", "BLACK"},
+                {"Gena", "Pupkin", "Pushkina2", "Bolshaya2", "+79212116772", 5, "12.02.2023", "Lalalhsalalal", "GREY"},
+                {"Sasha", "Pupkin", "Pushkina3", "Bolshaya3", "+79212116773", 5, "13.02.2023", "Lalaldasalalal", "BLACK,GREY"},
+                {"Lena", "Pupkin", "Pushkina4", "Bolshaya4", "+79212116774", 5, "14.02.2023", "Lalalaxczxlalal", ""}
         });
     }
 
@@ -55,9 +56,9 @@ public class TestCreateOrders {
 
     @Test
     @DisplayName("Checking the creation of sales with different data")
-    public void CheckTestCreateOrders(){
+    public void checkTestCreateOrders() {
         List<TestCreateOrders> testCreateOrderss = new ArrayList<TestCreateOrders>();
-        testCreateOrderss.add(new TestCreateOrders(firstName,lastName,address,metroStation,phone,rentTime,deliveryDate,comment,color));
+        testCreateOrderss.add(new TestCreateOrders(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color));
         Response response =
                 given()
                         .header("Content-type", "application/json")

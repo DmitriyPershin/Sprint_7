@@ -1,4 +1,4 @@
-package fileForTest;
+package file_for_test;
 
 public class DataForCourier {
 

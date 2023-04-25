@@ -10,13 +10,13 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class TestGetOrders {
     @Before
     public void setUp() {
-        RestAssured.baseURI ="http://qa-scooter.praktikum-services.ru";
+        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
     }
 
     @Test
     @DisplayName("Checking the receipt of the list of orders")
-    public void checkGetOrders(){
-            Response response =
+    public void checkGetOrders() {
+        Response response =
                 given().
                         get("/api/v1/orders");
         response.then().assertThat().body("orders", notNullValue())
