@@ -1,6 +1,9 @@
 package file_for_test;
 
 import io.restassured.response.Response;
+
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -33,8 +36,20 @@ public class CourierApi {
         response.then()
                 .statusCode(statusCode);
     }
-    public static void createNewCourier(String login, String password,String firstName, String headerType, String json, String addressApi, String field,boolean operand, int statusCode) {
-        DataForCourier courier = new DataForCourier(login, password,firstName);
+
+    public static Response loginForDelete(String login, String password, String headerType, String json, String addressApi) {
+        DataForLogin loginCourier = new DataForLogin(login, password);
+        return given()
+                .header(headerType, json)
+                .and()
+                .body(loginCourier)
+                .when()
+                .post(addressApi);
+
+    }
+
+    public static void createNewCourier(String login, String password, String firstName, String headerType, String json, String addressApi, String field, boolean operand, int statusCode) {
+        DataForCourier courier = new DataForCourier(login, password, firstName);
         Response response =
                 given()
                         .header(headerType, json)
@@ -47,7 +62,7 @@ public class CourierApi {
                 .statusCode(statusCode);
     }
 
-    public static void createCourierStatus(String login, String password,String firstName, String headerType, String json, String addressApi, int statusCode) {
+    public static void createCourierStatus(String login, String password, String firstName, String headerType, String json, String addressApi, int statusCode) {
         DataForCourier courier = new DataForCourier(login, password, firstName);
         Response response =
                 given()
@@ -60,4 +75,29 @@ public class CourierApi {
                 .statusCode(statusCode);
     }
 
+    public static void delete(int token) {
+        String str = String.valueOf(token);
+        String token2 = "/api/v1/courier/" + str;
+        Response response = given()
+                .body(str)
+                .when().
+                delete(token2);
+        response.then()
+                .statusCode(200);
+    }
+
+    public static <TestCreateOrders> void checkOrders(List<TestCreateOrders> testCreateOrderss) {
+        Response response =
+                given()
+                        .header("Content-type", "application/json")
+                        .and()
+                        .body(testCreateOrderss)
+                        .when()
+                        .post("/api/v1/orders");
+        response.then().assertThat().body("track", notNullValue())
+                .and()
+                .statusCode(201);
+    }
+
 }
+

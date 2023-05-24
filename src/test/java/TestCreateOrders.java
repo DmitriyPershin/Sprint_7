@@ -1,6 +1,6 @@
+import file_for_test.CourierApi;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
+
 
 @RunWith(Parameterized.class)
 public class TestCreateOrders {
@@ -59,15 +58,6 @@ public class TestCreateOrders {
     public void checkTestCreateOrders() {
         List<TestCreateOrders> testCreateOrderss = new ArrayList<TestCreateOrders>();
         testCreateOrderss.add(new TestCreateOrders(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color));
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(testCreateOrderss)
-                        .when()
-                        .post("/api/v1/orders");
-        response.then().assertThat().body("track", notNullValue())
-                .and()
-                .statusCode(201);
+        CourierApi.checkOrders(testCreateOrderss);
     }
 }

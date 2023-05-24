@@ -1,6 +1,4 @@
 TestLoginCourier.class
 TestCreateOrders.class
 TestGetOrders.class
-fileForTest\DataForCourier.class
 TestCreateNewCourier.class
-fileForTest\DataForLogin.class

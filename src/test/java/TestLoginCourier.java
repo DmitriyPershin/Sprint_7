@@ -16,7 +16,7 @@ public class TestLoginCourier {
     @Test
     @DisplayName("Verification of a request with a successful login and password")
     public void checkingGoodLoginCourier() {
-        CourierApi.loginCourierNotNull("123Ssasdgdagadfsdsatas", "12asasdfadfas3", "Content-type",
+        CourierApi.loginCourierNotNull("1fa", "2jfd", "Content-type",
                 "application/json", "/api/v1/courier/login", "id", 200);
     }
 
