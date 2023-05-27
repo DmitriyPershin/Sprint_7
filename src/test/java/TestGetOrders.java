@@ -1,11 +1,8 @@
+import file_for_test.OrderApi;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class TestGetOrders {
     @Before
@@ -16,11 +13,6 @@ public class TestGetOrders {
     @Test
     @DisplayName("Checking the receipt of the list of orders")
     public void checkGetOrders() {
-        Response response =
-                given().
-                        get("/api/v1/orders");
-        response.then().assertThat().body("orders", notNullValue())
-                .and()
-                .statusCode(200);
+        OrderApi.testGetOrders();
     }
 }

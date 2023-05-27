@@ -8,22 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import io.restassured.response.Response;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-
-import java.sql.SQLException;
-
-import static io.restassured.path.json.JsonPath.given;
+import org.testng.annotations.AfterTest;
 
 
 public class TestCreateNewCourier {
 
-    String login="11asssdfsd";
-    String password="2aasssssdfdf2";
-    String firstName="3asdsssdfssa";
+    String login="11asssssdfsd";
+    String password="2aassssassdfdf2";
+    String firstName="3asdssssdafssa";
     @Before
     public void setUp() {
         RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru";
@@ -34,12 +27,7 @@ public class TestCreateNewCourier {
     public void createNewCourierAndCheckStatus() {
         CourierApi.createNewCourier(login, password, firstName, "Content-type",
                 "application/json", "/api/v1/courier", "ok", true, 201);
-        Response responseLogin = CourierApi.loginForDelete(login, password, "Content-type",
-                "application/json", "/api/v1/courier/login");
-        int token = responseLogin.then().extract().path("id");
-        CourierApi.delete(token);
     }
-
 
     @Test
     @DisplayName("Checking that it is impossible to create two identical couriers")
@@ -55,5 +43,11 @@ public class TestCreateNewCourier {
         CourierApi.createCourierStatus("Ssdagaadfatas", "", "Stassuadsfasdfasdasdfper", "Content-type",
                 "application/json", "/api/v1/courier", 400);
     }
-
+    @AfterTest
+    public void deleteCourierForTest() {
+        Response responseLogin = CourierApi.loginForDelete(login, password, "Content-type",
+                "application/json", "/api/v1/courier/login");
+        int token = responseLogin.then().extract().path("id");
+        CourierApi.delete(token);
+    }
 }

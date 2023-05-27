@@ -1,4 +1,4 @@
-import file_for_test.CourierApi;
+import file_for_test.OrderApi;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.Before;
@@ -56,8 +56,8 @@ public class TestCreateOrders {
     @Test
     @DisplayName("Checking the creation of sales with different data")
     public void checkTestCreateOrders() {
-        List<TestCreateOrders> testCreateOrderss = new ArrayList<TestCreateOrders>();
-        testCreateOrderss.add(new TestCreateOrders(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color));
-        CourierApi.checkOrders(testCreateOrderss);
+        List<TestCreateOrders> testCreateOrders = new ArrayList<TestCreateOrders>();
+        testCreateOrders.add(new TestCreateOrders(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color));
+        OrderApi.testOrders(testCreateOrders);
     }
 }

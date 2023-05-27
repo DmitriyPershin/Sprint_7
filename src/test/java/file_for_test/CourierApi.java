@@ -85,19 +85,5 @@ public class CourierApi {
         response.then()
                 .statusCode(200);
     }
-
-    public static <TestCreateOrders> void checkOrders(List<TestCreateOrders> testCreateOrderss) {
-        Response response =
-                given()
-                        .header("Content-type", "application/json")
-                        .and()
-                        .body(testCreateOrderss)
-                        .when()
-                        .post("/api/v1/orders");
-        response.then().assertThat().body("track", notNullValue())
-                .and()
-                .statusCode(201);
-    }
-
 }
 
